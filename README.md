@@ -24,5 +24,5 @@ Criar uma aplicação com os seguintes requisitos:
   - Ao clicar no botão de editar usuário, deverá ser redirecionado para a tela de edição de usuário, onde os campos deverão ser preenchidos com os valores atuais do usuário.
   - Caso o usuário clique em voltar página ou cancelar e tenha havido alguma mudança nos campos, deverá mostrar um alerta perguntando se deseja de fato retornar sem salvar.
 
-**\*Dica, utilize o Local Storage para persistencia dos dados**
+**\*Dica, utilize o Local Storage para persistencia dos dados** <br>
 **\*Será necessário fazer o uso de Services e Modules**
