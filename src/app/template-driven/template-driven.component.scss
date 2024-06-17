@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+
+#criar-usuario-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
+    background-size: cover;
+    background-position: center;
+}
+
+#criar-usuario-box {
+
+    background-color: #c170e7;
+
+}
+
+.criar-usuario h1 {
+    font-size: 36px;
+    text-align: center;
+}

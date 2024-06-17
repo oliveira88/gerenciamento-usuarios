@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   public usuarioAutenticado: boolean = false;
+
   mostrarNavbarEmitter = new EventEmitter<boolean>();
 
   constructor(private router: Router) {}
@@ -23,5 +24,9 @@ export class AuthService {
 
       this.router.navigate(['login']);
     }
+  }
+
+  usuarioEstaAutenticado() {
+    return this.usuarioAutenticado;
   }
 }

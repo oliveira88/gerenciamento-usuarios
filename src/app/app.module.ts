@@ -9,6 +9,10 @@ import { HomeComponent } from './home/home.component';
 import { TemplateDrivenComponent } from './template-driven/template-driven.component';
 import { ReactiveComponent } from './reactive/reactive.component';
 import { TelaUsuarioComponent } from './tela-usuario/tela-usuario.component';
+import { AuthGuard } from './guard/auth-guard';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -19,8 +23,15 @@ import { TelaUsuarioComponent } from './tela-usuario/tela-usuario.component';
     ReactiveComponent,
     TelaUsuarioComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
-  providers: [AuthService],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+  ],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
