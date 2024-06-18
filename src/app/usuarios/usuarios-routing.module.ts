@@ -15,30 +15,20 @@ const routes: Routes = [
     canActivate: [authGuard],
     children: [
       {
-        path: 'rf',
-        children: [
-          {
-            path: 'criar-usuario',
-            component: CriarUsuarioRfComponent
-          },
-          {
-            path: 'editar-usuario',
-            component: EditarUsuarioRfComponent
-          }
-        ]
+        path: 'rf/criar-usuario',
+        component: CriarUsuarioRfComponent
       },
       {
-        path: 'tdf',
-        children: [
-          {
-            path: 'criar-usuario',
-            component: CriarUsuarioTdfComponent
-          },
-          {
-            path: 'editar-usuario',
-            component: EditarUsuarioTdfComponent
-          }
-        ]
+        path: 'rf/editar-usuario',
+        component: EditarUsuarioRfComponent
+      },
+      {
+        path: 'tdf/criar-usuario',
+        component: CriarUsuarioTdfComponent
+      },
+      {
+        path: 'tdf/editar-usuario',
+        component: EditarUsuarioTdfComponent
       },
       {
         path: ':formType',
