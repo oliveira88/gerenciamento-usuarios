@@ -1,0 +1,39 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "usuarios": [
+    {
+      "id": "2",
+      "nome": "Lavínia",
+      "sobrenome": "Franciscatto",
+      "nomeSocial": "Lavínia Franciscatto",
+      "cpf": "23454542323",
+      "dataDeNascimento": "1986-11-20T02:00:00.000Z",
+      "genero": "feminino"
+    },
+    {
+      "id": "3",
+      "nome": "Harry",
+      "sobrenome": "]",
+      "nomeSocial": "Harry Potter",
+      "cpf": "234.545.423-23",
+      "dataDeNascimento": "2024-06-13T03:00:00.000Z",
+      "genero": "masculino"
+    }
+  ]
+}

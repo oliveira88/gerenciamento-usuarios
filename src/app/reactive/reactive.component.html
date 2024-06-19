@@ -1,1 +1,87 @@
-<p>reactive works!</p>
+<div mat-dialog-title>
+  <h1>{{ data ? "Editar Usuário" : "Criar Usuário" }}</h1>
+</div>
+<form [formGroup]="templateDrivenForm" (ngSubmit)="onFormSubmit()">
+  <div mat-dialog-content class="content">
+    <div class="row">
+      <mat-form-field appearence="outline">
+        <mat-label>Nome</mat-label>
+        <input matInput type="text" formControlName="nome" />
+      </mat-form-field>
+      <mat-form-field appearence="outline">
+        <mat-label>Sobrenome</mat-label>
+        <input matInput type="text" formControlName="sobrenome" />
+      </mat-form-field>
+      <mat-form-field appearence="outline">
+        <mat-label>Nome Social</mat-label>
+        <input matInput type="text" formControlName="nomeSocial" />
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearence="outline">
+        <mat-label for="cpf">CPF</mat-label>
+        <input
+          id="cpf"
+          matInput
+          type="text"
+          id="cpf"
+          placeholder="xxx.xxx.xxx-xx"
+          formControlName="cpf"
+        />
+        <div
+          *ngIf="
+            templateDrivenForm.get('cpf')?.invalid &&
+            (templateDrivenForm.get('cpf')?.dirty ||
+              templateDrivenForm.get('cpf')?.touched)
+          "
+        >
+          <span style="color: red; font-size: 12px"
+            >CPF inválido. Deve estar no formato XXX.XXX.XXX-XX</span
+          >
+        </div>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Data de nascimento</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          formControlName="dataDeNascimento"
+        />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-radio-group aria-label="Select an option" formControlName="genero">
+        <mat-label><b>Gênero</b></mat-label>
+        <mat-radio-button value="feminino">Feminino</mat-radio-button>
+        <mat-radio-button value="masculino">Masculino</mat-radio-button>
+        <mat-radio-button value="outro">Outro</mat-radio-button>
+      </mat-radio-group>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button
+      mat-raised-button
+      type="button"
+      [mat-dialog-close]="false"
+      [disabled]="!templateDrivenForm.valid"
+    >
+      Cancel
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="!templateDrivenForm.valid"
+    >
+      {{ data ? "Editar" : "Salvar" }}
+    </button>
+  </div>
+</form>

@@ -1,4 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+// @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
+.mat-icon {
+    font-family: 'Material Icons';
+}
 
 * {
     margin: 0;
@@ -55,4 +60,39 @@ body {
     border-radius: 40px;
     cursor: pointer;
 
+}
+
+.custom-table {
+    min-width: auto !important;
+    width: 80%;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-radius: 20px;
+    overflow: auto;
+}
+
+.custom-table-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.custom-table mat-header-cell,
+.custom-table mat-cell {
+    padding: 8px 16px;
+    text-align: center;
+}
+
+
+
+@media (max-width: 768px) {
+    .custom-table {
+        width: 100%;
+    }
+
+    .custom-table mat-header-cell,
+    .custom-table mat-cell {
+        padding: 4px 8px;
+    }
 }

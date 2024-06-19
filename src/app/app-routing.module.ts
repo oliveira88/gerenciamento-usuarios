@@ -5,7 +5,6 @@ import { HomeComponent } from './home/home.component';
 import { TemplateDrivenComponent } from './template-driven/template-driven.component';
 import { ReactiveComponent } from './reactive/reactive.component';
 import { AuthGuard } from './guard/auth-guard';
-import { TelaUsuarioComponent } from './tela-usuario/tela-usuario.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
@@ -19,11 +18,6 @@ const routes: Routes = [
   {
     path: 'reactive-form',
     component: ReactiveComponent,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'tela-usuario',
-    component: TelaUsuarioComponent,
     canActivate: [AuthGuard],
   },
 ];
