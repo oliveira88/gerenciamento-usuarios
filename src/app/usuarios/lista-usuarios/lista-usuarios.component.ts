@@ -4,6 +4,7 @@ import { Usuario } from '../usuario';
 import { AuthService } from '../../auth/auth.service';
 import { Router } from '@angular/router';
 import { UsuarioStorageService } from '../usuario-storage.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-lista-usuarios',
@@ -18,10 +19,12 @@ export class ListaUsuariosComponent {
     private usuarioStorageService: UsuarioStorageService,
   ) {}
 
-  usuarios!: Usuario[];
+  usuarios$!: Observable<Usuario[]>;
 
   ngOnInit() {
-    this.usuarios = this.usuarioStorageService.getUsuarios();
+    this.usuarios$
+
+    this.usuarios$ = this.usuarioStorageService.getUsuarios();
   }
 
   excluir( usuario: Usuario ) {

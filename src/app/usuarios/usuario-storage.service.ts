@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { LocalStorageService } from '../local-storage.service';
 import { USUARIOS } from './mock-usuarios';
 import { Usuario } from './usuario';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,19 +19,20 @@ export class UsuarioStorageService {
       this.localStorageService.setItem( "usuarios", JSON.stringify(USUARIOS) );
     }
     else{
-      this.usuarios = JSON.parse( this.localStorageService.getItem( "usuarios" )! );
+      const usuariosArray = JSON.parse( this.localStorageService.getItem( "usuarios" )! );
+      this.usuarios$ = of( usuariosArray );
     }
   }
 
-  usuarios!: Usuario[];
+  usuarios$!: Observable<Usuario[]>;
 
-  getUsuarios(): Usuario[] {
-    return this.usuarios;
+  getUsuarios(): Observable<Usuario[]> {
+    return this.usuarios$;
   }
 
   criarUsuario( usuario: Usuario ): void {
 
-    const maiorIdAtual: number = this.getMaiorId( this.usuarios );
+    const maiorIdAtual: number = this.getMaiorId();
 
     usuario.id = maiorIdAtual + 1;
 
@@ -54,7 +56,7 @@ export class UsuarioStorageService {
     this.usuarios.push( usuario );
   }
 
-  getMaiorId( usuarios: Usuario[] ): number {
+  getMaiorId(): number {
 
     let maiorId: number = 0;
 

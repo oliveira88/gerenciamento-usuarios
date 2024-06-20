@@ -1,5 +1,5 @@
 <button [routerLink]="['./manter-usuarios', 'criar']">Criar usuário</button>
-<ul *ngFor="let usuario of usuarios">
+<ul *ngFor="let usuario of usuarios$ | async">
     <li>
         {{usuario.nome}},
         {{usuario.cpf}},
