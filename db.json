@@ -1,14 +1,14 @@
 {
   "posts": [
     {
-      "id": 1,
+      "id": "1",
       "title": "json-server",
       "author": "typicode"
     }
   ],
   "comments": [
     {
-      "id": 1,
+      "id": "1",
       "body": "some comment",
       "postId": 1
     }
@@ -29,7 +29,7 @@
     {
       "id": "3",
       "nome": "Harry",
-      "sobrenome": "]",
+      "sobrenome": "Potter",
       "nomeSocial": "Harry Potter",
       "cpf": "234.545.423-23",
       "dataDeNascimento": "2024-06-13T03:00:00.000Z",
