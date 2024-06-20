@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UsuariosComponent } from './usuarios/usuarios.component';
-import { CriarUsuarioRfComponent } from './reactive-form/criar-usuario-rf/criar-usuario-rf.component';
-import { EditarUsuarioRfComponent } from './reactive-form/editar-usuario-rf/editar-usuario-rf.component';
-import { CriarUsuarioTdfComponent } from './template-driven-form/criar-usuario-tdf/criar-usuario-tdf.component';
-import { EditarUsuarioTdfComponent } from './template-driven-form/editar-usuario-tdf/editar-usuario-tdf.component';
 import { authGuard } from '../auth/auth.guard';
 import { ListaUsuariosComponent } from './lista-usuarios/lista-usuarios.component';
+import { ManterUsuariosRfComponent } from './reactive-form/manter-usuarios-rf/manter-usuarios-rf.component';
+import { ManterUsuariosTdfComponent } from './template-driven-form/manter-usuarios-tdf/manter-usuarios-tdf.component';
 
 const routes: Routes = [
   {
@@ -15,20 +13,12 @@ const routes: Routes = [
     canActivate: [authGuard],
     children: [
       {
-        path: 'rf/criar-usuario',
-        component: CriarUsuarioRfComponent
+        path: 'rf/manter-usuarios/:formMode',
+        component: ManterUsuariosRfComponent
       },
       {
-        path: 'rf/editar-usuario',
-        component: EditarUsuarioRfComponent
-      },
-      {
-        path: 'tdf/criar-usuario',
-        component: CriarUsuarioTdfComponent
-      },
-      {
-        path: 'tdf/editar-usuario',
-        component: EditarUsuarioTdfComponent
+        path: 'tdf/manter-usuarios/:formMode',
+        component: ManterUsuariosTdfComponent
       },
       {
         path: ':formType',

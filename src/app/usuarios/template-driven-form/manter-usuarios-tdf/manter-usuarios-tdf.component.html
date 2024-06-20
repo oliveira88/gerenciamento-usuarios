@@ -1,0 +1,80 @@
+<div>
+    <h2 *ngIf="formMode === 'criar'">Criar Usuário</h2>
+    <h2 *ngIf="formMode === 'editar'">Editar Usuário</h2>
+
+    {{ usuario | json }}
+    {{ endereco | json }}
+    <form #usuarioForm="ngForm" (ngSubmit)="onSubmit(usuarioForm)">
+        <div class="form-group">
+            <label>Nome:</label>
+            <input type="text" name="nome"
+            required
+            [(ngModel)]="usuario.nome">
+        </div>
+
+        <div class="form-group">
+            <label>Data de Nascimento:</label>
+            <input type="date" name="dataNascimento"
+            required
+            [(ngModel)]="usuario.dataDeNascimento">
+        </div>
+
+        <div class="form-group">
+            <label>CPF:</label>
+            <input type="text" name="cpf"
+            required
+            [(ngModel)]="usuario.cpf">
+        </div>
+
+        <div class="form-group">
+            <label>Email:</label>
+            <input type="email" name="email"
+            required
+            [(ngModel)]="usuario.email">
+        </div>
+
+        <div class="form-group">
+            <label>É admin:</label>
+            <input type="radio" name="isAdmin" value="true"
+            required
+            [(ngModel)]="usuario.isAdmin"> <label>Sim</label>
+
+            <input type="radio" name="isAdmin" value="false"
+            required
+            [(ngModel)]="usuario.isAdmin"> <label>Não</label>
+        </div>
+
+        <div class="form-group">
+            <label>Nome Social:</label>
+            <input type="text" name="nomeSocial"
+            [(ngModel)]="usuario.nomeSocial">
+        </div>
+
+        <h4>Endereço:</h4>
+        <div class="form-group">
+            <label>Cidade:</label>
+            <input type="text" name="cidade"
+            [(ngModel)]="endereco.cidade">
+        </div>
+
+        <div class="form-group">
+            <label>Estado:</label>
+            <input type="text" name="estado"
+            [(ngModel)]="endereco.estado">
+        </div>
+
+        <div class="form-group">
+            <label>CEP:</label>
+            <input type="text" name="cep"
+            [(ngModel)]="endereco.cep">
+        </div>
+
+        <div class="form-group">
+            <label>Logradouro:</label>
+            <input type="text" name="logradouro"
+            [(ngModel)]="endereco.logradouro">
+        </div>
+
+        <button type="submit" >Submit</button>
+    </form>
+</div>

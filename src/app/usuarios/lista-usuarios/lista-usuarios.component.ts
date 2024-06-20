@@ -3,6 +3,7 @@ import { USUARIOS } from '../mock-usuarios';
 import { Usuario } from '../usuario';
 import { AuthService } from '../../auth/auth.service';
 import { Router } from '@angular/router';
+import { UsuarioStorageService } from '../usuario-storage.service';
 
 @Component({
   selector: 'app-lista-usuarios',
@@ -13,13 +14,18 @@ export class ListaUsuariosComponent {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private usuarioStorageService: UsuarioStorageService,
   ) {}
 
   usuarios!: Usuario[];
 
   ngOnInit() {
-    this.usuarios = USUARIOS;
+    this.usuarios = this.usuarioStorageService.getUsuarios();
+  }
+
+  excluir( usuario: Usuario ) {
+    this.usuarioStorageService.excluirUsuario( usuario );
   }
 
   logout() {

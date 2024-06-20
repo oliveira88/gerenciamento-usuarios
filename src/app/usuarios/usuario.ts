@@ -1,16 +1,23 @@
-export interface Endereco {
-    cidade: string,
-    estado: string,
-    cep: string,
-    logradouro: string
+export class Endereco {
+    
+    constructor(
+        public cidade: string = '',
+        public estado: string = '',
+        public cep: string = '',
+        public logradouro: string = '',
+    ) {}
 }
 
-export interface Usuario {
-    nome: string,
-    dataDeNascimento: Date,
-    cpf: string,
-    email: string,
-    isAdmin: boolean,
-    nomeSocial?: string,
-    endereco?: Endereco
+export class Usuario {
+
+    constructor(
+        public id: number = 0,
+        public nome: string = '',
+        public dataDeNascimento: Date = new Date(),
+        public cpf: string = '',
+        public email: string = '',
+        public isAdmin: boolean = false,
+        public nomeSocial?: string,
+        public endereco?: Endereco,
+    ) {}
 }

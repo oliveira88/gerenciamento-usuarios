@@ -1,12 +1,12 @@
-<button [routerLink]="['./criar-usuario']">Criar usuário</button>
+<button [routerLink]="['./manter-usuarios', 'criar']">Criar usuário</button>
 <ul *ngFor="let usuario of usuarios">
     <li>
         {{usuario.nome}},
         {{usuario.cpf}},
         {{usuario.email}},
         {{usuario.isAdmin}}
-        <button [routerLink]="['./editar-usuario']">Editar</button>
-        <button>Excluir</button>
+        <button [routerLink]="['./manter-usuarios', 'editar']">Editar</button>
+        <button (click)="excluir(usuario)">Excluir</button>
     </li>
 </ul>
 <br>
