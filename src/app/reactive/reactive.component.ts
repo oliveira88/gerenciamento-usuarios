@@ -1,12 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  FormGroup,
-  ValidationErrors,
-  ValidatorFn,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ReactiveService } from './reactive.service';
 
@@ -16,7 +9,7 @@ import { ReactiveService } from './reactive.service';
   styleUrls: ['./reactive.component.scss'],
 })
 export class ReactiveComponent implements OnInit {
-  templateDrivenForm: FormGroup;
+  reactiveForm: FormGroup;
 
   constructor(
     private fb: FormBuilder,
@@ -24,7 +17,7 @@ export class ReactiveComponent implements OnInit {
     private dialogRef: MatDialogRef<ReactiveService>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    this.templateDrivenForm = this.fb.group({
+    this.reactiveForm = this.fb.group({
       id: [''],
       nome: [''],
       sobrenome: [''],
@@ -42,14 +35,14 @@ export class ReactiveComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.templateDrivenForm.patchValue(this.data);
+    this.reactiveForm.patchValue(this.data);
   }
 
   onFormSubmit() {
-    if (this.templateDrivenForm.valid) {
+    if (this.reactiveForm.valid) {
       if (this.data) {
         this.drivenService
-          .editarUsuario(this.data.id, this.templateDrivenForm.value)
+          .editarUsuario(this.data.id, this.reactiveForm.value)
           .subscribe({
             next: (valid: any) => {
               alert('Usuário editado!');
@@ -60,7 +53,7 @@ export class ReactiveComponent implements OnInit {
             },
           });
       } else {
-        this.drivenService.addUsuario(this.templateDrivenForm.value).subscribe({
+        this.drivenService.addUsuario(this.reactiveForm.value).subscribe({
           next: (valid: any) => {
             alert('Usuário criado!');
             this.dialogRef.close(true);

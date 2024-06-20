@@ -1,11 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../login-usuario/auth.service';
 import { MatDialog } from '@angular/material/dialog';
-import { MatSort, Sort, MatSortModule } from '@angular/material/sort';
+import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-// import { TemplateDrivenComponent } from '../template-driven/template-driven.component';
-// import { TemplateDrivenService } from '../template-driven/template-driven.service';
+import { MatTableDataSource } from '@angular/material/table';
 import { ReactiveService } from '../reactive/reactive.service';
 import { ReactiveComponent } from '../reactive/reactive.component';
 
@@ -35,7 +33,7 @@ export class HomeComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private _dialog: MatDialog,
-    private drivenService: ReactiveService
+    private reactiveService: ReactiveService
   ) {}
 
   ngOnInit() {
@@ -57,7 +55,7 @@ export class HomeComponent implements OnInit {
   }
 
   getUsuarioList() {
-    this.drivenService.getUsuarioList().subscribe({
+    this.reactiveService.getUsuarioList().subscribe({
       next: (response) => {
         this.dataSource = new MatTableDataSource(response);
         this.dataSource.sort = this.sort;
@@ -68,7 +66,7 @@ export class HomeComponent implements OnInit {
   }
 
   deleteUsuario(id: number) {
-    this.drivenService.deleteUsuario(id).subscribe({
+    this.reactiveService.deleteUsuario(id).subscribe({
       next: (response) => {
         alert('Usário deletado!');
         this.getUsuarioList();

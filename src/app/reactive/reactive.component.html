@@ -1,7 +1,7 @@
 <div mat-dialog-title>
   <h1>{{ data ? "Editar Usuário" : "Criar Usuário" }}</h1>
 </div>
-<form [formGroup]="templateDrivenForm" (ngSubmit)="onFormSubmit()">
+<form [formGroup]="reactiveForm" (ngSubmit)="onFormSubmit()">
   <div mat-dialog-content class="content">
     <div class="row">
       <mat-form-field appearence="outline">
@@ -31,9 +31,8 @@
         />
         <div
           *ngIf="
-            templateDrivenForm.get('cpf')?.invalid &&
-            (templateDrivenForm.get('cpf')?.dirty ||
-              templateDrivenForm.get('cpf')?.touched)
+            reactiveForm.get('cpf')?.invalid &&
+            (reactiveForm.get('cpf')?.dirty || reactiveForm.get('cpf')?.touched)
           "
         >
           <span style="color: red; font-size: 12px"
@@ -71,7 +70,7 @@
       mat-raised-button
       type="button"
       [mat-dialog-close]="false"
-      [disabled]="!templateDrivenForm.valid"
+      [disabled]="!reactiveForm.valid"
     >
       Cancel
     </button>
@@ -79,7 +78,7 @@
       mat-raised-button
       color="primary"
       type="submit"
-      [disabled]="!templateDrivenForm.valid"
+      [disabled]="!reactiveForm.valid"
     >
       {{ data ? "Editar" : "Salvar" }}
     </button>
