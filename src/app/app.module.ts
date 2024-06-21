@@ -25,6 +25,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
 import { ReactiveService } from './reactive/reactive-service/reactive.service';
+import { HomeService } from './home/home.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -53,7 +54,7 @@ import { ReactiveService } from './reactive/reactive-service/reactive.service';
     MatIconModule,
     routing,
   ],
-  providers: [AuthService, AuthGuard, ReactiveService],
+  providers: [AuthService, AuthGuard, ReactiveService, HomeService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

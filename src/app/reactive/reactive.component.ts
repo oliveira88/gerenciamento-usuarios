@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class ReactiveComponent implements OnInit {
   reactiveForm: FormGroup;
-  data: any; // Ajuste conforme necessário para o seu contexto
+  data: any;
 
   constructor(
     private fb: FormBuilder,
@@ -31,6 +31,10 @@ export class ReactiveComponent implements OnInit {
       ],
       dataDeNascimento: [''],
       genero: [''],
+      cidade: [''],
+      estado: [''],
+      cep: [''],
+      logradouro: [''],
     });
   }
 
@@ -52,7 +56,8 @@ export class ReactiveComponent implements OnInit {
           .subscribe({
             next: () => {
               alert('Usuário editado!');
-              this.onCancel(); // Reseta o formulário após a edição
+              this.onCancel();
+              this.router.navigate(['/home']);
             },
             error: (err: any) => {
               console.error(err);

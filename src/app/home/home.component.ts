@@ -15,6 +15,7 @@ import { ReactiveComponent } from '../reactive/reactive.component';
 export class HomeComponent implements OnInit {
   mostrarNavbar: boolean = true;
   showForm: boolean = true;
+  private usuarios: any[] = [];
 
   displayedColumns: string[] = [
     'id',
@@ -24,6 +25,10 @@ export class HomeComponent implements OnInit {
     'cpf',
     'dataDeNascimento',
     'genero',
+    'cidade',
+    'estado',
+    'cep',
+    'logradouro',
     'action',
   ];
   dataSource!: MatTableDataSource<any>;
