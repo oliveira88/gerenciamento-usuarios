@@ -19,6 +19,10 @@ const routes: Routes = [
     path: 'reactive-form',
     component: ReactiveComponent,
     canActivate: [AuthGuard],
+    children: [
+      { path: 'criar-usuario', component: ReactiveComponent },
+      { path: ':id', component: ReactiveComponent },
+    ],
   },
 ];
 

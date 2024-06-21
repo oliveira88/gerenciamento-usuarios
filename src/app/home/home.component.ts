@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../login-usuario/auth.service';
-import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ReactiveService } from '../reactive/reactive-service/reactive.service';
-import { ReactiveComponent } from '../reactive/reactive.component';
 import { StateService } from '../state.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +16,6 @@ export class HomeComponent implements OnInit {
   mostrarNavbar: boolean = true;
 
   showForm: boolean = true;
-  private usuarios: any[] = [];
   colunasVisiveis: string[] = [
     'id',
     'nome',
@@ -42,9 +40,9 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private _dialog: MatDialog,
     private reactiveService: ReactiveService,
-    private stateService: StateService
+    private stateService: StateService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -59,6 +57,7 @@ export class HomeComponent implements OnInit {
 
   abrirCriarUsuario() {
     this.showForm = true;
+    this.router.navigate(['/reactive-form/criar-usuario']);
   }
 
   onFormClose(updated: boolean) {
@@ -107,15 +106,7 @@ export class HomeComponent implements OnInit {
   }
 
   abrirEditarUsuario(data: any) {
-    const dialogRef = this._dialog.open(ReactiveComponent, {
-      data,
-    });
-    dialogRef.afterClosed().subscribe({
-      next: (value) => {
-        if (value) {
-          this.getUsuarioList();
-        }
-      },
-    });
+    this.showForm = true;
+    this.router.navigate(['reactive-form', data.id]);
   }
 }
