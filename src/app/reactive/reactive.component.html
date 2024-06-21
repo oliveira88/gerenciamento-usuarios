@@ -1,31 +1,29 @@
-<div mat-dialog-title>
-  <h1>{{ data ? "Editar Usuário" : "Criar Usuário" }}</h1>
-</div>
+<h1>{{ data ? "Editar Usuário" : "Criar Usuário" }}</h1>
+
 <form [formGroup]="reactiveForm" (ngSubmit)="onFormSubmit()">
-  <div mat-dialog-content class="content">
+  <div class="content">
     <div class="row">
-      <mat-form-field appearence="outline">
+      <mat-form-field appearance="outline">
         <mat-label>Nome</mat-label>
         <input matInput type="text" formControlName="nome" />
       </mat-form-field>
-      <mat-form-field appearence="outline">
+      <mat-form-field appearance="outline">
         <mat-label>Sobrenome</mat-label>
         <input matInput type="text" formControlName="sobrenome" />
       </mat-form-field>
-      <mat-form-field appearence="outline">
+      <mat-form-field appearance="outline">
         <mat-label>Nome Social</mat-label>
         <input matInput type="text" formControlName="nomeSocial" />
       </mat-form-field>
     </div>
 
     <div class="row">
-      <mat-form-field appearence="outline">
+      <mat-form-field appearance="outline">
         <mat-label for="cpf">CPF</mat-label>
         <input
           id="cpf"
           matInput
           type="text"
-          id="cpf"
           placeholder="xxx.xxx.xxx-xx"
           formControlName="cpf"
         />
@@ -35,9 +33,9 @@
             (reactiveForm.get('cpf')?.dirty || reactiveForm.get('cpf')?.touched)
           "
         >
-          <span style="color: red; font-size: 12px"
-            >CPF inválido. Deve estar no formato XXX.XXX.XXX-XX</span
-          >
+          <span style="color: red; font-size: 12px">
+            CPF inválido. Deve estar no formato XXX.XXX.XXX-XX
+          </span>
         </div>
       </mat-form-field>
       <mat-form-field>
@@ -65,14 +63,16 @@
       </mat-radio-group>
     </div>
   </div>
-  <div mat-dialog-actions>
+
+  <div class="actions">
     <button
       mat-raised-button
       type="button"
-      [mat-dialog-close]="false"
+      (click)="onCancel()"
       [disabled]="!reactiveForm.valid"
+      routerLink="/home"
     >
-      Cancel
+      Cancelar
     </button>
     <button
       mat-raised-button
@@ -84,3 +84,4 @@
     </button>
   </div>
 </form>
+<router-outlet></router-outlet>

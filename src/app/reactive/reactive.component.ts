@@ -1,7 +1,7 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ReactiveService } from './reactive.service';
+import { ReactiveService } from './reactive-service/reactive.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reactive',
@@ -10,12 +10,12 @@ import { ReactiveService } from './reactive.service';
 })
 export class ReactiveComponent implements OnInit {
   reactiveForm: FormGroup;
+  data: any; // Ajuste conforme necessário para o seu contexto
 
   constructor(
     private fb: FormBuilder,
-    private drivenService: ReactiveService,
-    private dialogRef: MatDialogRef<ReactiveService>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    private reactiveService: ReactiveService,
+    private router: Router
   ) {
     this.reactiveForm = this.fb.group({
       id: [''],
@@ -35,28 +35,35 @@ export class ReactiveComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.reactiveForm.patchValue(this.data);
+    if (this.data) {
+      this.reactiveForm.patchValue(this.data);
+    }
+  }
+
+  onCancel() {
+    this.reactiveForm.reset();
   }
 
   onFormSubmit() {
     if (this.reactiveForm.valid) {
       if (this.data) {
-        this.drivenService
+        this.reactiveService
           .editarUsuario(this.data.id, this.reactiveForm.value)
           .subscribe({
-            next: (valid: any) => {
+            next: () => {
               alert('Usuário editado!');
-              this.dialogRef.close(true);
+              this.onCancel(); // Reseta o formulário após a edição
             },
             error: (err: any) => {
               console.error(err);
             },
           });
       } else {
-        this.drivenService.addUsuario(this.reactiveForm.value).subscribe({
-          next: (valid: any) => {
+        this.reactiveService.addUsuario(this.reactiveForm.value).subscribe({
+          next: () => {
             alert('Usuário criado!');
-            this.dialogRef.close(true);
+            this.onCancel();
+            this.router.navigate(['/home']);
           },
           error: (err: any) => {
             console.error(err);

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule, routing } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginUsuarioComponent } from './login-usuario/login-usuario.component';
 import { AuthService } from './login-usuario/auth.service';
@@ -24,7 +24,7 @@ import { TemplateDrivenService } from './template-driven/template-driven.service
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatIconModule } from '@angular/material/icon';
-import { ReactiveService } from './reactive/reactive.service';
+import { ReactiveService } from './reactive/reactive-service/reactive.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,6 +51,7 @@ import { ReactiveService } from './reactive/reactive.service';
     MatTableModule,
     MatPaginatorModule,
     MatIconModule,
+    routing,
   ],
   providers: [AuthService, AuthGuard, ReactiveService],
   bootstrap: [AppComponent],

@@ -6,9 +6,15 @@
 
         <div class="navbar">
           <a routerLink="/tela-usuario">Template Driven Form</a>
-          <button class="criar-usuario-btn" (click)="abrirCriarUsuario()">
+          <button
+            class="criar-usuario-btn"
+            routerLink="/reactive-form"
+            (click)="abrirCriarUsuario()"
+          >
             Reactive Form
           </button>
+
+          <a routerLink="/login">Logout</a>
         </div>
       </header>
     </div>

@@ -29,7 +29,7 @@ export class ReactiveService {
 
   generateRandomId(): string {
     const min = Math.ceil(1);
-    const max = Math.floor(100000000);
+    const max = Math.floor(10000);
     const id = Math.floor(Math.random() * (max - min + 1)) + min;
     return id.toString();
   }

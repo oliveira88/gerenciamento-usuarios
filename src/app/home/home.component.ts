@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { ReactiveService } from '../reactive/reactive.service';
+import { ReactiveService } from '../reactive/reactive-service/reactive.service';
 import { ReactiveComponent } from '../reactive/reactive.component';
 
 @Component({
@@ -14,6 +14,7 @@ import { ReactiveComponent } from '../reactive/reactive.component';
 })
 export class HomeComponent implements OnInit {
   mostrarNavbar: boolean = true;
+  showForm: boolean = true;
 
   displayedColumns: string[] = [
     'id',
@@ -44,14 +45,14 @@ export class HomeComponent implements OnInit {
   }
 
   abrirCriarUsuario() {
-    const dialogRef = this._dialog.open(ReactiveComponent);
-    dialogRef.afterClosed().subscribe({
-      next: (value) => {
-        if (value) {
-          this.getUsuarioList();
-        }
-      },
-    });
+    this.showForm = true;
+  }
+
+  onFormClose(updated: boolean) {
+    this.showForm = false;
+    if (updated) {
+      this.getUsuarioList();
+    }
   }
 
   getUsuarioList() {

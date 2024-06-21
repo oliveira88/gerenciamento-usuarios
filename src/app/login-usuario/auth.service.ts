@@ -1,5 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { Usuario } from './IUsuario';
+import { UsuarioLogin } from './IUsuarioLogin';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -12,7 +12,7 @@ export class AuthService {
 
   constructor(private router: Router) {}
 
-  fazerLogin(usuario: Usuario) {
+  fazerLogin(usuario: UsuarioLogin) {
     if (usuario.nome === 'usuario@email.com' && usuario.senha === '1234') {
       this.usuarioAutenticado = true;
       this.mostrarNavbarEmitter.emit(true);
