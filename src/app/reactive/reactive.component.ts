@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveService } from './reactive-service/reactive.service';
 import { Router } from '@angular/router';
+import { StateService } from '../state.service';
 
 @Component({
   selector: 'app-reactive',
@@ -15,13 +16,13 @@ export class ReactiveComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private reactiveService: ReactiveService,
-    private router: Router
+    private router: Router,
+    private stateService: StateService
   ) {
     this.reactiveForm = this.fb.group({
       id: [''],
       nome: [''],
       sobrenome: [''],
-      nomeSocial: [''],
       cpf: [
         '',
         [
@@ -31,6 +32,7 @@ export class ReactiveComponent implements OnInit {
       ],
       dataDeNascimento: [''],
       genero: [''],
+      nomeSocial: [''],
       cidade: [''],
       estado: [''],
       cep: [''],
@@ -76,5 +78,7 @@ export class ReactiveComponent implements OnInit {
         });
       }
     }
+    const formValues = this.reactiveForm.value;
+    this.stateService.atualizarFormState(formValues);
   }
 }

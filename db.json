@@ -18,13 +18,43 @@
   },
   "usuarios": [
     {
-      "id": "452",
+      "id": "1577",
       "nome": "Harry",
       "sobrenome": "Potter",
-      "nomeSocial": "Harry Potter",
       "cpf": "123.456.789-00",
-      "dataDeNascimento": "2024-06-28T03:00:00.000Z",
-      "genero": "masculino"
+      "dataDeNascimento": "1970-08-27T03:00:00.000Z",
+      "genero": "masculino",
+      "nomeSocial": "",
+      "cidade": "",
+      "estado": "",
+      "cep": "",
+      "logradouro": ""
+    },
+    {
+      "id": "5395",
+      "nome": "Hermione",
+      "sobrenome": "Granger",
+      "cpf": "123.456.789-00",
+      "dataDeNascimento": "1970-11-10T03:00:00.000Z",
+      "genero": "feminino",
+      "nomeSocial": "Draco Malfoy",
+      "cidade": "Hogwarts",
+      "estado": "Hogsmeade",
+      "cep": "1234567",
+      "logradouro": "Londres"
+    },
+    {
+      "id": "1814",
+      "nome": "Draco",
+      "sobrenome": "Malfoy",
+      "cpf": "123.456.789-00",
+      "dataDeNascimento": "1970-11-10T03:00:00.000Z",
+      "genero": "masculino",
+      "nomeSocial": "Draco Malfoy",
+      "cidade": "Hogwarts",
+      "estado": "Hogsmeade",
+      "cep": "1234567",
+      "logradouro": "Londres"
     }
   ]
 }

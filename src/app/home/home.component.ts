@@ -6,6 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ReactiveService } from '../reactive/reactive-service/reactive.service';
 import { ReactiveComponent } from '../reactive/reactive.component';
+import { StateService } from '../state.service';
 
 @Component({
   selector: 'app-home',
@@ -14,23 +15,26 @@ import { ReactiveComponent } from '../reactive/reactive.component';
 })
 export class HomeComponent implements OnInit {
   mostrarNavbar: boolean = true;
+
   showForm: boolean = true;
   private usuarios: any[] = [];
-
-  displayedColumns: string[] = [
+  colunasVisiveis: string[] = [
     'id',
     'nome',
     'sobrenome',
-    'nomeSocial',
     'cpf',
     'dataDeNascimento',
     'genero',
+    'action',
+  ];
+  colunasOpcionais: string[] = [
+    'nomeSocial',
     'cidade',
     'estado',
     'cep',
     'logradouro',
-    'action',
   ];
+
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatSort) sort!: MatSort;
@@ -39,7 +43,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private _dialog: MatDialog,
-    private reactiveService: ReactiveService
+    private reactiveService: ReactiveService,
+    private stateService: StateService
   ) {}
 
   ngOnInit() {
@@ -47,6 +52,9 @@ export class HomeComponent implements OnInit {
       this.mostrarNavbar = mostrar;
     });
     this.getUsuarioList();
+    this.stateService.formState$.subscribe((formValues) => {
+      this.atualizarColunasVisiveis(formValues);
+    });
   }
 
   abrirCriarUsuario() {
@@ -58,6 +66,23 @@ export class HomeComponent implements OnInit {
     if (updated) {
       this.getUsuarioList();
     }
+  }
+
+  atualizarColunasVisiveis(formValues: any) {
+    this.colunasVisiveis = [
+      'id',
+      'nome',
+      'sobrenome',
+      'cpf',
+      'dataDeNascimento',
+      'genero',
+    ];
+    this.colunasOpcionais.forEach((column) => {
+      if (formValues[column]) {
+        this.colunasVisiveis.push(column);
+      }
+    });
+    this.colunasVisiveis.push('action');
   }
 
   getUsuarioList() {
