@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { USUARIOS } from '../mock-usuarios';
 import { Usuario } from '../usuario';
 import { AuthService } from '../../auth/auth.service';
 import { Router } from '@angular/router';
@@ -22,8 +21,6 @@ export class ListaUsuariosComponent {
   usuarios$!: Observable<Usuario[]>;
 
   ngOnInit() {
-    this.usuarios$
-
     this.usuarios$ = this.usuarioStorageService.getUsuarios();
   }
 

@@ -15,9 +15,10 @@ export class Usuario {
         public nome: string = '',
         public dataDeNascimento: Date = new Date(),
         public cpf: string = '',
+        public cpfResponsavel?: string,
         public email: string = '',
         public isAdmin: boolean = false,
-        public nomeSocial?: string,
+        public nomeSocial?: string ,
         public endereco?: Endereco,
     ) {}
 }

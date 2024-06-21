@@ -5,7 +5,7 @@
         {{usuario.cpf}},
         {{usuario.email}},
         {{usuario.isAdmin}}
-        <button [routerLink]="['./manter-usuarios', 'editar']">Editar</button>
+        <button [routerLink]="['./manter-usuarios', 'editar', { editId: usuario.id }]">Editar</button>
         <button (click)="excluir(usuario)">Excluir</button>
     </li>
 </ul>
