@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveService } from './reactive-service/reactive.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { StateService } from '../state.service';
 
 @Component({
@@ -12,12 +12,15 @@ import { StateService } from '../state.service';
 export class ReactiveComponent implements OnInit {
   reactiveForm: FormGroup;
   data: any;
+  abaixoDezoito: boolean = false;
+  abaixoDoze: boolean = false;
 
   constructor(
     private fb: FormBuilder,
     private reactiveService: ReactiveService,
     private router: Router,
-    private stateService: StateService
+    private stateService: StateService,
+    private route: ActivatedRoute
   ) {
     this.reactiveForm = this.fb.group({
       id: [''],
@@ -30,7 +33,7 @@ export class ReactiveComponent implements OnInit {
           Validators.pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/),
         ],
       ],
-      dataDeNascimento: [''],
+      dataDeNascimento: ['', [Validators.required]],
       genero: [''],
       nomeSocial: [''],
       cidade: [''],
@@ -38,12 +41,49 @@ export class ReactiveComponent implements OnInit {
       cep: [''],
       logradouro: [''],
     });
+
+    this.reactiveForm
+      .get('dataDeNascimento')
+      ?.valueChanges.subscribe((value) => {
+        this.checarIdade();
+      });
+  }
+
+  // ddn = data de nascimento
+  checarIdade(): void {
+    const ddn = this.reactiveForm.get('dataDeNascimento')?.value;
+    if (ddn) {
+      const idade = this.calcularIdade(new Date(ddn));
+      if (idade < 12) {
+        this.abaixoDoze = true;
+        this.reactiveForm.disable();
+      } else {
+        this.abaixoDoze = false;
+        this.reactiveForm.enable();
+        if (idade < 18) {
+          this.abaixoDezoito = true;
+          this.reactiveForm.get('cpf')?.setValidators([Validators.required]);
+        } else {
+          this.abaixoDezoito = false;
+          this.reactiveForm.get('cpf')?.clearValidators();
+        }
+        this.reactiveForm.get('cpf')?.updateValueAndValidity();
+      }
+    }
+  }
+
+  calcularIdade(aniversario: Date): number {
+    const idadeDifMs = Date.now() - aniversario.getTime();
+    const dataIdade = new Date(idadeDifMs);
+    return Math.abs(dataIdade.getUTCFullYear() - 2003);
   }
 
   ngOnInit(): void {
     if (this.data) {
       this.reactiveForm.patchValue(this.data);
     }
+    const idUsuario = this.route.snapshot.paramMap.get('id') || '';
+    this.reactiveService.getUsuarioById(idUsuario);
   }
 
   onCancel() {

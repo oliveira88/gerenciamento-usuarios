@@ -15,8 +15,11 @@ export class ReactiveService {
   }
 
   editarUsuario(id: string, data: any): Observable<any> {
-    debugger;
     return this.http.put(`http://localhost:3000/usuarios/${id}`, data);
+  }
+
+  getUsuarioById(id: string): Observable<any> {
+    return this.http.get(`http://localhost:3000/usuarios/${id}`);
   }
 
   getUsuarioList(): Observable<any> {

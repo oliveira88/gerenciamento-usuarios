@@ -32,6 +32,11 @@
           <span style="color: red; font-size: 12px">
             CPF inválido. Deve estar no formato XXX.XXX.XXX-XX
           </span>
+          <div [(ngModel)]="abaixoDezoito">
+            <span style="color: red; font-size: 12px">
+              CPF do responsável
+            </span>
+          </div>
         </div>
       </mat-form-field>
       <mat-form-field>
@@ -47,6 +52,11 @@
           [for]="picker"
         ></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
+        <div *ngIf="abaixoDoze">
+          <span style="color: red; font-size: 12px">
+            Usuários menores de 12 anos não podem se cadastrar.
+          </span>
+        </div>
       </mat-form-field>
     </div>
 
@@ -98,7 +108,7 @@
       mat-raised-button
       color="primary"
       type="submit"
-      [disabled]="!reactiveForm.valid"
+      [disabled]="!reactiveForm.valid || abaixoDoze"
     >
       {{ data ? "Editar" : "Salvar" }}
     </button>
