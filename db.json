@@ -29,6 +29,19 @@
       "estado": "Hogsmeade",
       "cep": "09876",
       "logradouro": "Brasil "
+    },
+    {
+      "id": "1627",
+      "nome": "Draco",
+      "sobrenome": "Malfoy",
+      "cpf": "123.456.789-00",
+      "dataDeNascimento": "1994-10-07T03:00:00.000Z",
+      "genero": "masculino",
+      "nomeSocial": "Harry Potter",
+      "cidade": "Hogwarts",
+      "estado": "Hogsmeade",
+      "cep": "09876",
+      "logradouro": "Brasil "
     }
   ]
 }

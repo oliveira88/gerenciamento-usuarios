@@ -82,8 +82,6 @@ export class ReactiveComponent implements OnInit {
     if (this.data) {
       this.reactiveForm.patchValue(this.data);
     }
-    const idUsuario = this.route.snapshot.paramMap.get('id') || '';
-    this.reactiveService.getUsuarioById(idUsuario);
   }
 
   onCancel() {

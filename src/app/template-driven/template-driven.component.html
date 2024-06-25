@@ -1,1 +1,151 @@
- 
+<h1>{{ data ? "Editar Usuário" : "Criar Usuário" }}</h1>
+
+<form (ngSubmit)="onFormSubmit()" #userForm="ngForm">
+  <div class="content">
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Nome</mat-label>
+        <input
+          matInput
+          type="text"
+          name="nome"
+          [(ngModel)]="usuario.nome"
+          required
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Sobrenome</mat-label>
+        <input
+          matInput
+          type="text"
+          name="sobrenome"
+          [(ngModel)]="usuario.sobrenome"
+          required
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label for="cpf">CPF</mat-label>
+        <input
+          id="cpf"
+          matInput
+          type="text"
+          name="cpf"
+          placeholder="xxx.xxx.xxx-xx"
+          [(ngModel)]="usuario.cpf"
+          required
+          pattern="^\d{3}\.\d{3}\.\d{3}-\d{2}$"
+        />
+        <div *ngIf="userForm.submitted && !userForm.controls['cpf']?.valid">
+          <span style="color: red; font-size: 12px">
+            CPF inválido. Deve estar no formato XXX.XXX.XXX-XX
+          </span>
+          <div *ngIf="abaixoDezoito">
+            <span style="color: red; font-size: 12px">CPF do responsável</span>
+          </div>
+        </div>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Data de nascimento</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          name="dataDeNascimento"
+          [(ngModel)]="usuario.dataDeNascimento"
+          required
+          (dateChange)="checarIdade()"
+        />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <div *ngIf="abaixoDoze">
+          <span style="color: red; font-size: 12px">
+            Usuários menores de 12 anos não podem se cadastrar.
+          </span>
+        </div>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-radio-group
+        aria-label="Select an option"
+        name="genero"
+        [(ngModel)]="usuario.genero"
+      >
+        <mat-label><b>Gênero</b></mat-label>
+        <mat-radio-button value="feminino">Feminino</mat-radio-button>
+        <mat-radio-button value="masculino">Masculino</mat-radio-button>
+        <mat-radio-button value="outro">Outro</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <!-- Campos Opcionais -->
+    <div class="row">
+      <h2>Informações opcionais</h2>
+      <mat-form-field appearance="outline">
+        <mat-label>Nome Social</mat-label>
+        <input
+          matInput
+          type="text"
+          name="nomeSocial"
+          [(ngModel)]="usuario.nomeSocial"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Cidade</mat-label>
+        <input
+          matInput
+          type="text"
+          name="cidade"
+          [(ngModel)]="usuario.cidade"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Estado</mat-label>
+        <input
+          matInput
+          type="text"
+          name="estado"
+          [(ngModel)]="usuario.estado"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>CEP</mat-label>
+        <input matInput type="text" name="cep" [(ngModel)]="usuario.cep" />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Logradouro</mat-label>
+        <input
+          matInput
+          type="text"
+          name="logradouro"
+          [(ngModel)]="usuario.logradouro"
+        />
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button
+      mat-raised-button
+      type="button"
+      (click)="onCancel()"
+      routerLink="/home"
+    >
+      Cancelar
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="abaixoDoze || !userForm.valid"
+    >
+      {{ data ? "Editar" : "Salvar" }}
+    </button>
+  </div>
+</form>

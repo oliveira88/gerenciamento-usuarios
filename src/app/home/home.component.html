@@ -5,16 +5,21 @@
         <a class="logo">Gerenciamento de Usuários</a>
 
         <div class="navbar">
-          <a routerLink="/tela-usuario">Template Driven Form</a>
+          <button
+            class="criar-usuario-btn"
+            routerLink="/template-form"
+            (click)="abrirCriarUsuario()"
+          >
+            Template Driven
+          </button>
           <button
             class="criar-usuario-btn"
             routerLink="/reactive-form"
             (click)="abrirCriarUsuario()"
           >
-            Reactive Form
+            Reactive
           </button>
-
-          <a routerLink="/login">Logout</a>
+          <button class="criar-usuario-btn" routerLink="/login">Logout</button>
         </div>
       </header>
     </div>
