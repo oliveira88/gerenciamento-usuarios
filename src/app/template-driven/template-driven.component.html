@@ -42,9 +42,31 @@
           <span style="color: red; font-size: 12px">
             CPF inválido. Deve estar no formato XXX.XXX.XXX-XX
           </span>
-          <div *ngIf="abaixoDezoito">
-            <span style="color: red; font-size: 12px">CPF do responsável</span>
-          </div>
+        </div>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label for="cpfResonsavel">CPF Responsável</mat-label>
+        <input
+          id="cpfResonsavel"
+          matInput
+          type="text"
+          name="cpfResonsavel"
+          placeholder="xxx.xxx.xxx-xx"
+          [(ngModel)]="usuario.cpfResonsavel"
+          required
+          pattern="^\d{3}\.\d{3}\.\d{3}-\d{2}$"
+        />
+        <div
+          *ngIf="
+            userForm.submitted && !userForm.controls['cpfResonsavel']?.valid
+          "
+        >
+          <span style="color: red; font-size: 12px">
+            CPF inválido. Deve estar no formato XXX.XXX.XXX-XX
+          </span>
         </div>
       </mat-form-field>
       <mat-form-field>

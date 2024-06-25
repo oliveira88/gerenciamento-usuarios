@@ -56,6 +56,18 @@ export class ReactiveComponent implements OnInit {
       });
   }
 
+  ngOnInit(): void {
+    // this.route.snapshot
+    const idUsuario = this.route.snapshot.paramMap.get('id');
+    if (!idUsuario) return;
+    this.reactiveService.getUsuarioById(idUsuario).subscribe((data) => {
+      if (data) {
+        console.log(data);
+        this.data = data;
+        this.reactiveForm.patchValue(this.data);
+      }
+    });
+  }
   // ddn = data de nascimento
   checarIdade(): void {
     const ddn = this.reactiveForm.get('dataDeNascimento')?.value;
@@ -87,14 +99,17 @@ export class ReactiveComponent implements OnInit {
     return Math.abs(dataIdade.getUTCFullYear() - 1970);
   }
 
-  ngOnInit(): void {
-    if (this.data) {
-      this.reactiveForm.patchValue(this.data);
-    }
-  }
-
   onCancel() {
-    this.reactiveForm.reset();
+    if (this.reactiveForm.dirty) {
+      const confirmaUsuario = confirm(
+        'Você tem alterações não salvas. Tem certeza que deseja cancelar?'
+      );
+      if (confirmaUsuario) {
+        this.reactiveForm.reset();
+        this.router.navigate(['/home']);
+      }
+    } else {
+    }
   }
 
   onFormSubmit() {

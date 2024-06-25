@@ -18,21 +18,7 @@
   },
   "usuarios": [
     {
-      "id": "2700",
-      "nome": "Hermione",
-      "sobrenome": "Granger",
-      "cpf": "123.456.789-90",
-      "cpfResponsavel": "123.123.123-09",
-      "dataDeNascimento": "2009-06-25T03:00:00.000Z",
-      "genero": "feminino",
-      "nomeSocial": "",
-      "cidade": "Hogwarts",
-      "estado": "Hogsmeade",
-      "cep": "09876",
-      "logradouro": "Brasil "
-    },
-    {
-      "id": "2765",
+      "id": "1307",
       "nome": "Rony",
       "sobrenome": "Weasley",
       "cpf": "123.456.789-00",
@@ -44,6 +30,34 @@
       "estado": "SP",
       "cep": "1234567890",
       "logradouro": "Av Paulista"
+    },
+    {
+      "id": "776",
+      "nome": "Harry",
+      "sobrenome": "Potter",
+      "cpf": "123.456.789-00",
+      "cpfResponsavel": "",
+      "dataDeNascimento": "1994-07-25T03:00:00.000Z",
+      "genero": "masculino",
+      "nomeSocial": "",
+      "cidade": "Hogwarts",
+      "estado": "Hogsmeade",
+      "cep": "1234567",
+      "logradouro": "SP"
+    },
+    {
+      "id": "3098",
+      "nome": "Draco",
+      "sobrenome": "Malfoy",
+      "cpf": "123.456.789-00",
+      "cpfResponsavel": "",
+      "dataDeNascimento": "1994-07-25T03:00:00.000Z",
+      "genero": "",
+      "nomeSocial": "",
+      "cidade": "Hogwarts",
+      "estado": "Hogsmeade",
+      "cep": "1234567",
+      "logradouro": "SP"
     }
   ]
 }

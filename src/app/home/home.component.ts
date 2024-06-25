@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit {
 
   abrirCriarUsuario() {
     this.showForm = true;
-    this.router.navigate(['/reactive-form/criar-usuario']);
+    this.router.navigate(['/reactive-form/usuario']);
   }
 
   onFormClose(updated: boolean) {
@@ -102,6 +102,7 @@ export class HomeComponent implements OnInit {
       next: (response) => {
         alert('Usário deletado!');
         this.getUsuarioList();
+        // this.list = this.list.filter( d=> d.id !== id);
       },
       error: console.log,
     });
@@ -109,6 +110,6 @@ export class HomeComponent implements OnInit {
 
   abrirEditarUsuario(data: any) {
     this.showForm = true;
-    this.router.navigate(['reactive-form', data.id]);
+    this.router.navigate(['reactive-form/usuario', data.id]);
   }
 }
