@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
     'action',
   ];
   colunasOpcionais: string[] = [
+    'cpfResponsavel',
     'nomeSocial',
     'cidade',
     'estado',
@@ -73,6 +74,7 @@ export class HomeComponent implements OnInit {
       'nome',
       'sobrenome',
       'cpf',
+      'cpfResponsavel',
       'dataDeNascimento',
       'genero',
     ];

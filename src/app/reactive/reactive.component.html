@@ -32,13 +32,32 @@
           <span style="color: red; font-size: 12px">
             CPF inválido. Deve estar no formato XXX.XXX.XXX-XX
           </span>
-          <div [(ngModel)]="abaixoDezoito">
-            <span style="color: red; font-size: 12px">
-              CPF do responsável
-            </span>
-          </div>
         </div>
       </mat-form-field>
+
+      <div class="row" *ngIf="abaixoDezoito">
+        <mat-form-field appearance="outline">
+          <mat-label for="cpfResponsavel">CPF do Responsável</mat-label>
+          <input
+            id="cpfResponsavel"
+            matInput
+            type="text"
+            placeholder="xxx.xxx.xxx-xx"
+            formControlName="cpfResponsavel"
+          />
+          <div
+            *ngIf="
+              reactiveForm.get('cpfResponsavel')?.invalid &&
+              (reactiveForm.get('cpfResponsavel')?.dirty ||
+                reactiveForm.get('cpfResponsavel')?.touched)
+            "
+          >
+            <span style="color: red; font-size: 12px">
+              CPF do responsável inválido. Deve estar no formato XXX.XXX.XXX-XX
+            </span>
+          </div>
+        </mat-form-field>
+      </div>
       <mat-form-field>
         <mat-label>Data de nascimento</mat-label>
         <input

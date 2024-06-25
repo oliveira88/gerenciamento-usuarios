@@ -85,6 +85,21 @@
           <td mat-cell *matCellDef="let element">{{ element.cpf }}</td>
         </ng-container>
 
+        <!-- CPF Responsável Column -->
+        <ng-container matColumnDef="cpfResponsavel">
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            mat-sort-header
+            sortActionDescription="Sort by cpfResponsavel"
+          >
+            CPF Responsável
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.cpfResponsavel }}
+          </td>
+        </ng-container>
+
         <!-- Data de nascimento Column -->
         <ng-container matColumnDef="dataDeNascimento">
           <th

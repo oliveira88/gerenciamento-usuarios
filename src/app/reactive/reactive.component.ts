@@ -33,6 +33,13 @@ export class ReactiveComponent implements OnInit {
           Validators.pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/),
         ],
       ],
+      cpfResponsavel: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(/^\d{3}\.\d{3}\.\d{3}-\d{2}$/),
+        ],
+      ],
       dataDeNascimento: ['', [Validators.required]],
       genero: [''],
       nomeSocial: [''],
@@ -62,12 +69,14 @@ export class ReactiveComponent implements OnInit {
         this.reactiveForm.enable();
         if (idade < 18) {
           this.abaixoDezoito = true;
-          this.reactiveForm.get('cpf')?.setValidators([Validators.required]);
+          this.reactiveForm
+            .get('cpfResponsavel')
+            ?.setValidators([Validators.required]);
         } else {
           this.abaixoDezoito = false;
-          this.reactiveForm.get('cpf')?.clearValidators();
+          this.reactiveForm.get('cpfResponsavel')?.clearValidators();
         }
-        this.reactiveForm.get('cpf')?.updateValueAndValidity();
+        this.reactiveForm.get('cpfResponsavel')?.updateValueAndValidity();
       }
     }
   }
@@ -75,7 +84,7 @@ export class ReactiveComponent implements OnInit {
   calcularIdade(aniversario: Date): number {
     const idadeDifMs = Date.now() - aniversario.getTime();
     const dataIdade = new Date(idadeDifMs);
-    return Math.abs(dataIdade.getUTCFullYear() - 2003);
+    return Math.abs(dataIdade.getUTCFullYear() - 1970);
   }
 
   ngOnInit(): void {
