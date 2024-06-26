@@ -16,11 +16,13 @@ export class ManterUsuariosTdfComponent {
   usuario: Usuario = new Usuario();
   endereco: Endereco = new Endereco();
 
+  idade!: number;
+
   constructor(
     private usuarioStorageService: UsuarioStorageService,
     private router: Router
    ) {}
-  
+
   ngOnInit() {
 
     if( this.formMode === 'criar' ) {
@@ -29,7 +31,8 @@ export class ManterUsuariosTdfComponent {
       this.endereco = new Endereco();
     }
     else if( this.formMode === 'editar' ) {
-      this.usuario = this.usuarioStorageService.getUsuario( parseInt(this.editId) );
+      this.usuario = Object.assign({}, this.usuarioStorageService.getUsuario( parseInt(this.editId) ));
+      this.updateIdade( this.usuario.dataDeNascimento );
     }
   }
 
@@ -86,6 +89,46 @@ export class ManterUsuariosTdfComponent {
       this.endereco.cep !== '' ||
       this.endereco.logradouro !== ''
     ) {
+      return false;
+    }
+
+    return true;
+  }
+
+  toDate( data: string ): Date {
+    return new Date( data );
+  }
+
+  updateIdade( data: string ): void {
+    const dataAtual = new Date();
+    const dataNascimento = new Date( data );
+
+    const dias = dataAtual.getDay() - dataNascimento.getDay();
+    const meses = dataAtual.getMonth() - dataNascimento.getMonth();
+    const anos = dataAtual.getFullYear() - dataNascimento.getFullYear();
+
+    let idade = anos;
+
+    // Se ainda não fez aniversário...
+    if( dias <= 0 && meses <= 0 ) {
+      idade = anos - 1;
+    }
+
+    this.idade = idade;
+  }
+
+  menorDe12(): boolean {
+
+    if( this.idade >= 12 ) {
+      return false;
+    }
+
+    return true;
+  }
+
+  menorDe18(): boolean {
+
+    if( this.idade >= 18 ) {
       return false;
     }
 

@@ -13,7 +13,7 @@ export class Usuario {
     constructor(
         public id: number = 0,
         public nome: string = '',
-        public dataDeNascimento: Date = new Date(),
+        public dataDeNascimento: string = '',
         public cpf: string = '',
         public cpfResponsavel?: string,
         public email: string = '',

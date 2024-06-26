@@ -16,24 +16,29 @@
         <div class="form-group">
             <label>Data de Nascimento:</label>
             <br>
-            <input type="date" name="dataNascimento"
+            <input type="date" name="dataNascimento" id="dataNascimento"
             required
-            [(ngModel)]="usuario.dataDeNascimento">
+            (ngModelChange)="updateIdade($event)"
+            [ngModel]="usuario.dataDeNascimento">
         </div>
 
         <div class="form-group">
             <label>CPF:</label>
             <br>
             <input type="text" name="cpf"
+            mask="000.000.000-00"
             required
+            cpfValidator
             [(ngModel)]="usuario.cpf">
         </div>
 
-        <div class="form-group" *ngIf="usuario.dataDeNascimento ">
+        <div class="form-group" *ngIf="menorDe18()">
             <label>CPF do Responsável (obrigatório para menores de 18 anos):</label>
             <br>
-            <input type="text" name="cpf"
+            <input type="text" name="cpfResponsavel"
+            mask="000.000.000-00"
             required
+            cpfValidator
             [(ngModel)]="usuario.cpfResponsavel">
         </div>
 
@@ -85,6 +90,7 @@
             <label>CEP:</label>
             <br>
             <input type="text" name="cep"
+            mask="00000-000"
             [(ngModel)]="endereco.cep">
         </div>
 
@@ -95,7 +101,7 @@
             [(ngModel)]="endereco.logradouro">
         </div>
 
-        <button type="submit" [disabled]="!usuarioForm.valid">Salvar</button>
+        <button type="submit" [disabled]="!usuarioForm.valid || menorDe12()">Salvar</button>
         <button (click)="cancelar()">Cancelar</button>
     </form>
 </div>
