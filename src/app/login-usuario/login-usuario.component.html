@@ -1,0 +1,39 @@
+<link
+  href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+  rel="stylesheet"
+/>
+
+<div id="login-usuario-container" class="wrapper">
+  <form id="login-usuario-box">
+    <h1>Login</h1>
+    <div class="input-box">
+      <input
+        [(ngModel)]="usuario.nome"
+        type="text"
+        placeholder="Username"
+        id="nome"
+        name="nome"
+        required
+      />
+      <i class="bx bxs-user-circle"></i>
+    </div>
+    <div class="input-box">
+      <input
+        [(ngModel)]="usuario.senha"
+        type="password"
+        placeholder="Password"
+        id="senha"
+        name="password"
+        required
+      />
+      <i class="bx bxs-lock"></i>
+    </div>
+
+    <button type="submit" class="btn" name="action" (click)="fazerLogin()">
+      Login
+    </button>
+    <div class="register-link">
+      <p>Não tem uma conta? <a href="#"> Registrar</a></p>
+    </div>
+  </form>
+</div>

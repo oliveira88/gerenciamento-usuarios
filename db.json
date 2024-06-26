@@ -1,0 +1,63 @@
+{
+  "posts": [
+    {
+      "id": "1",
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  },
+  "usuarios": [
+    {
+      "id": "1307",
+      "nome": "Rony",
+      "sobrenome": "Weasley",
+      "cpf": "123.456.789-00",
+      "cpfResponsavel": "",
+      "dataDeNascimento": "2003-06-25T03:00:00.000Z",
+      "genero": "masculino",
+      "nomeSocial": "",
+      "cidade": "São Paulo",
+      "estado": "SP",
+      "cep": "1234567890",
+      "logradouro": "Av Paulista"
+    },
+    {
+      "id": "776",
+      "nome": "Harry",
+      "sobrenome": "Potter",
+      "cpf": "123.456.789-00",
+      "cpfResponsavel": "",
+      "dataDeNascimento": "1994-07-25T03:00:00.000Z",
+      "genero": "masculino",
+      "nomeSocial": "",
+      "cidade": "Hogwarts",
+      "estado": "Hogsmeade",
+      "cep": "1234567",
+      "logradouro": "SP"
+    },
+    {
+      "id": "3098",
+      "nome": "Draco",
+      "sobrenome": "Malfoy",
+      "cpf": "123.456.789-00",
+      "cpfResponsavel": "",
+      "dataDeNascimento": "1994-07-25T03:00:00.000Z",
+      "genero": "",
+      "nomeSocial": "",
+      "cidade": "Hogwarts",
+      "estado": "Hogsmeade",
+      "cep": "1234567",
+      "logradouro": "SP"
+    }
+  ]
+}
