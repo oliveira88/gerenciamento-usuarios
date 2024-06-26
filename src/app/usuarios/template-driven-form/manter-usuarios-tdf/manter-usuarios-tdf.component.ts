@@ -24,14 +24,10 @@ export class ManterUsuariosTdfComponent {
    ) {}
 
   ngOnInit() {
-
-    if( this.formMode === 'criar' ) {
-
-      this.usuario = new Usuario();
-      this.endereco = new Endereco();
-    }
-    else if( this.formMode === 'editar' ) {
+    
+    if( this.formMode === 'editar' ) {
       this.usuario = Object.assign({}, this.usuarioStorageService.getUsuario( parseInt(this.editId) ));
+      this.endereco = Object.assign({}, this.usuario.endereco );
       this.updateIdade( this.usuario.dataDeNascimento );
     }
   }
@@ -93,10 +89,6 @@ export class ManterUsuariosTdfComponent {
     }
 
     return true;
-  }
-
-  toDate( data: string ): Date {
-    return new Date( data );
   }
 
   updateIdade( data: string ): void {

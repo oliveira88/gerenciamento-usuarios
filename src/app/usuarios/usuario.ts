@@ -1,24 +1,20 @@
 export class Endereco {
     
-    constructor(
-        public cidade: string = '',
-        public estado: string = '',
-        public cep: string = '',
-        public logradouro: string = '',
-    ) {}
+    cidade: string = '';
+    estado: string = '';
+    cep: string = '';
+    logradouro: string = '';
 }
 
 export class Usuario {
 
-    constructor(
-        public id: number = 0,
-        public nome: string = '',
-        public dataDeNascimento: string = '',
-        public cpf: string = '',
-        public cpfResponsavel?: string,
-        public email: string = '',
-        public isAdmin: boolean = false,
-        public nomeSocial?: string ,
-        public endereco?: Endereco,
-    ) {}
+    id: number = 0;
+    nome: string = '';
+    dataDeNascimento: string = '';
+    cpf: string = '';
+    cpfResponsavel?: string;
+    email: string = '';
+    isAdmin: boolean = false;
+    nomeSocial?: string;
+    endereco?: Endereco;
 }

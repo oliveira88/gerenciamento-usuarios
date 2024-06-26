@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Endereco, Usuario } from '../../usuario';
 import { UsuarioStorageService } from '../../usuario-storage.service';
 import { Router } from '@angular/router';
-import { FormControl, FormGroup, NgForm } from '@angular/forms';
+import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-manter-usuarios-rf',
@@ -13,40 +13,68 @@ export class ManterUsuariosRfComponent {
 
   @Input() formMode!: string;
   @Input() editId!: string;
-  usuario: Usuario = new Usuario();
-  endereco: Endereco = new Endereco();
+  usuario = new Usuario();
+  endereco = new Endereco();
 
   usuarioForm = new FormGroup({
-    nome: new FormControl(this.usuario.nome),
-    dataNascimento: new FormControl(this.usuario.dataDeNascimento),
-    cpf: new FormControl(this.usuario.cpf),
-    cpfResponsavel: new FormControl(this.usuario.cpfResponsavel),
-    email: new FormControl(this.usuario.email),
-    isAdmin: new FormControl(this.usuario.isAdmin),
-    nomeSocial: new FormControl(this.usuario.nomeSocial),
-    cidade: new FormControl(this.endereco.cidade),
-    estado: new FormControl(this.endereco.estado),
-    cep: new FormControl(this.endereco.cep),
-    logradouro: new FormControl(this.endereco.logradouro),
+    nome: new FormControl(''),
+    dataDeNascimento: new FormControl(''),
+    cpf: new FormControl(''),
+    cpfResponsável: new FormControl(''),
+    email: new FormControl(''),
+    isAdmin: new FormControl(false),
+    nomeSocial: new FormControl(''),
+    cidade: new FormControl(''),
+    estado: new FormControl(''),
+    cep: new FormControl(''),
+    logradouro: new FormControl(''),
   });
 
   idade!: number;
 
   constructor(
     private usuarioStorageService: UsuarioStorageService,
-    private router: Router
+    private router: Router,
+    private formBuilder: FormBuilder
    ) {}
 
   ngOnInit() {
 
-    if( this.formMode === 'criar' ) {
-
-      this.usuario = new Usuario();
-      this.endereco = new Endereco();
-    }
-    else if( this.formMode === 'editar' ) {
+    if( this.formMode === 'editar' ) {
       this.usuario = Object.assign({}, this.usuarioStorageService.getUsuario( parseInt(this.editId) ));
       this.updateIdade( this.usuario.dataDeNascimento );
+      this.atualizarFormGroup( this.usuario, this.usuario.endereco );
+    }
+  }
+
+  atualizarFormGroup( usuario: Usuario, endereco: Endereco | undefined ) {
+    this.usuarioForm.patchValue({
+      nome: usuario.nome,
+      dataDeNascimento: usuario.dataDeNascimento,
+      cpf: usuario.cpf,
+      email: usuario.email,
+      isAdmin: usuario.isAdmin,
+    });
+
+    if( endereco !== undefined ) {
+      this.usuarioForm.patchValue({
+        cidade: endereco.cidade,
+        estado: endereco.estado,
+        cep: endereco.cep,
+        logradouro: endereco.logradouro
+      });
+    }
+
+    if( usuario.nomeSocial !== undefined ) {
+      this.usuarioForm.patchValue({
+        nomeSocial: usuario.nomeSocial
+      });
+    }
+
+    if( usuario.cpfResponsavel !== undefined ) {
+      this.usuarioForm.patchValue({
+        cpfResponsável: usuario.cpfResponsavel
+      });
     }
   }
 
@@ -54,6 +82,7 @@ export class ManterUsuariosRfComponent {
 
     if( usuarioForm.valid ) {
 
+      this.formGroupParaUsuario( usuarioForm );
       this.formataCamposOpcionais();
       this.usuarioStorageService.criarUsuario( this.usuario );
     }
@@ -65,6 +94,7 @@ export class ManterUsuariosRfComponent {
 
     if( usuarioForm.valid ) {
 
+      this.formGroupParaUsuario( usuarioForm );
       this.formataCamposOpcionais();
       this.usuarioStorageService.editarUsuario( this.usuario );
     }
@@ -72,10 +102,31 @@ export class ManterUsuariosRfComponent {
     this.router.navigate(['../']);
   }
 
+  formGroupParaUsuario( usuarioForm: FormGroup ): void {
+
+    this.usuario.nome = usuarioForm.value.nome;
+    this.usuario.dataDeNascimento = usuarioForm.value.dataDeNascimento;
+    this.usuario.cpf = usuarioForm.value.cpf;
+    this.usuario.cpfResponsavel = usuarioForm.value.cpfResponsavel;
+    this.usuario.email = usuarioForm.value.email;
+    this.usuario.isAdmin = usuarioForm.value.isAdmin;
+    this.usuario.nomeSocial = usuarioForm.value.nomeSocial;
+    this.endereco.cidade = usuarioForm.value.cidade;
+    this.endereco.estado = usuarioForm.value.estado;
+    this.endereco.cep = usuarioForm.value.cep;
+    this.endereco.logradouro = usuarioForm.value.logradouro;
+
+    this.usuario.endereco = this.endereco;
+  }
+
   formataCamposOpcionais(): void {
 
     if( this.nomeSocialVazio() ) {
       this.usuario.nomeSocial = undefined;
+    }
+
+    if( this.cpfResponsavelVazio() ) {
+      this.usuario.cpfResponsavel = undefined;
     }
 
     if( this.enderecoVazio() ) {
@@ -88,7 +139,16 @@ export class ManterUsuariosRfComponent {
 
   nomeSocialVazio(): boolean {
 
-    if( this.usuario.nomeSocial !== '' ) {
+    if( this.usuario.nome === '' ) {
+      return false;
+    }
+
+    return true;
+  }
+
+  cpfResponsavelVazio(): boolean {
+
+    if( this.usuario.cpfResponsavel === '' ) {
       return false;
     }
 
@@ -107,10 +167,6 @@ export class ManterUsuariosRfComponent {
     }
 
     return true;
-  }
-
-  toDate( data: string ): Date {
-    return new Date( data );
   }
 
   updateIdade( data: string ): void {
