@@ -14,6 +14,7 @@ export class AuthService implements OnInit {
   }
 
   /*
+  // Nota:
   // Se eu quisesse uma ação assíncrona, como o delay, poderia usar um
   // Observable pra encapsular esse dado "boolean":
 

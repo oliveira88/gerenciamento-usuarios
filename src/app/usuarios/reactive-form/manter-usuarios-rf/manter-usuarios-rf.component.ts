@@ -16,19 +16,21 @@ export class ManterUsuariosRfComponent {
   usuario = new Usuario();
   endereco = new Endereco();
 
-  usuarioForm = new FormGroup({
-    nome: new FormControl(''),
-    dataDeNascimento: new FormControl(''),
-    cpf: new FormControl(''),
-    cpfResponsável: new FormControl(''),
-    email: new FormControl(''),
+  usuarioForm = this.formBuilder.group({
+    nome: [''],
+    dataDeNascimento: [''],
+    cpf: [''],
+    cpfResponsável: [''],
+    email: [''],
     isAdmin: new FormControl(false),
-    nomeSocial: new FormControl(''),
-    cidade: new FormControl(''),
-    estado: new FormControl(''),
-    cep: new FormControl(''),
-    logradouro: new FormControl(''),
-  });
+    nomeSocial: [''],
+    endereco: this.formBuilder.group({
+      cidade: [''],
+      estado: [''],
+      cep: [''],
+      logradouro: [''],
+    })
+  })
 
   idade!: number;
 
@@ -57,7 +59,7 @@ export class ManterUsuariosRfComponent {
     });
 
     if( endereco !== undefined ) {
-      this.usuarioForm.patchValue({
+      this.usuarioForm.get('endereco')?.patchValue({
         cidade: endereco.cidade,
         estado: endereco.estado,
         cep: endereco.cep,
@@ -87,7 +89,7 @@ export class ManterUsuariosRfComponent {
       this.usuarioStorageService.criarUsuario( this.usuario );
     }
 
-    this.router.navigate(['../']);
+    this.router.navigate(['/usuarios/rf']);
   }
 
   editarSubmit( usuarioForm: FormGroup ): void {
@@ -95,11 +97,13 @@ export class ManterUsuariosRfComponent {
     if( usuarioForm.valid ) {
 
       this.formGroupParaUsuario( usuarioForm );
+      console.log(this.usuario.nomeSocial);
       this.formataCamposOpcionais();
+      console.log(this.usuario.nomeSocial);
       this.usuarioStorageService.editarUsuario( this.usuario );
     }
 
-    this.router.navigate(['../']);
+    this.router.navigate(['/usuarios/rf']);
   }
 
   formGroupParaUsuario( usuarioForm: FormGroup ): void {
@@ -111,10 +115,10 @@ export class ManterUsuariosRfComponent {
     this.usuario.email = usuarioForm.value.email;
     this.usuario.isAdmin = usuarioForm.value.isAdmin;
     this.usuario.nomeSocial = usuarioForm.value.nomeSocial;
-    this.endereco.cidade = usuarioForm.value.cidade;
-    this.endereco.estado = usuarioForm.value.estado;
-    this.endereco.cep = usuarioForm.value.cep;
-    this.endereco.logradouro = usuarioForm.value.logradouro;
+    this.endereco.cidade = usuarioForm.get('endereco')!.value.cidade!;
+    this.endereco.estado = usuarioForm.get('endereco')!.value.estado!;
+    this.endereco.cep = usuarioForm.get('endereco')!.value.cep!;
+    this.endereco.logradouro = usuarioForm.get('endereco')!.value.logradouro!;
 
     this.usuario.endereco = this.endereco;
   }
@@ -139,7 +143,7 @@ export class ManterUsuariosRfComponent {
 
   nomeSocialVazio(): boolean {
 
-    if( this.usuario.nome === '' ) {
+    if( this.usuario.nomeSocial !== '' ) {
       return false;
     }
 
@@ -207,6 +211,6 @@ export class ManterUsuariosRfComponent {
 
   cancelar(): void {
 
-    this.router.navigate(['../']);
+    this.router.navigate(['/usuarios/rf']);
   }
 }

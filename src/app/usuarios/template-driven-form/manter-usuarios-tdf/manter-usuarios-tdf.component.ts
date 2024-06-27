@@ -40,7 +40,7 @@ export class ManterUsuariosTdfComponent {
       this.usuarioStorageService.criarUsuario( this.usuario );
     }
 
-    this.router.navigate(['../']);
+    this.router.navigate(['/usuarios/tdf']);
   }
 
   editarSubmit( usuarioForm: NgForm ): void {
@@ -51,7 +51,7 @@ export class ManterUsuariosTdfComponent {
       this.usuarioStorageService.editarUsuario( this.usuario );
     }
 
-    this.router.navigate(['../']);
+    this.router.navigate(['/usuarios/tdf']);
   }
 
   formataCamposOpcionais(): void {
@@ -129,6 +129,6 @@ export class ManterUsuariosTdfComponent {
 
   cancelar(): void {
 
-    this.router.navigate(['../']);
+    this.router.navigate(['/usuarios/tdf']);
   }
 }

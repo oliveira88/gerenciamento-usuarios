@@ -25,6 +25,7 @@ export class cpfValidatorDirective implements Validator, OnInit {
 		return { 'cpfNaoContem11Caracteres': true }
 	}
 
+	// CPFs que o algoritmo dos 2 dígitos permite, mas são inexistentes
 	if (cpf === '11111111111' ||
 		cpf === '22222222222' ||
 		cpf === '33333333333' ||
