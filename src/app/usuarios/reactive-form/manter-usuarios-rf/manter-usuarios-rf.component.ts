@@ -3,6 +3,8 @@ import { Endereco, Usuario } from '../../usuario';
 import { UsuarioStorageService } from '../../usuario-storage.service';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { DialogService } from 'src/app/dialog.service';
 
 @Component({
   selector: 'app-manter-usuarios-rf',
@@ -15,6 +17,8 @@ export class ManterUsuariosRfComponent {
   @Input() editId!: string;
   usuario = new Usuario();
   endereco = new Endereco();
+  formAlterado: boolean = false;
+  idade!: number;
 
   usuarioForm = this.formBuilder.group({
     nome: [''],
@@ -32,12 +36,11 @@ export class ManterUsuariosRfComponent {
     })
   })
 
-  idade!: number;
-
   constructor(
     private usuarioStorageService: UsuarioStorageService,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private dialogService: DialogService,
    ) {}
 
   ngOnInit() {
@@ -212,5 +215,14 @@ export class ManterUsuariosRfComponent {
   cancelar(): void {
 
     this.router.navigate(['/usuarios/rf']);
+  }
+
+  canDeactivate(): Observable<boolean> | boolean {
+
+    if( this.usuarioForm.untouched ) {
+      return true;
+    }
+
+    return this.dialogService.confirm('Você irá sair sem salvar alterações. ');
   }
 }

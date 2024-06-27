@@ -5,6 +5,7 @@ import { authGuard } from '../auth/auth.guard';
 import { ListaUsuariosComponent } from './lista-usuarios/lista-usuarios.component';
 import { ManterUsuariosRfComponent } from './reactive-form/manter-usuarios-rf/manter-usuarios-rf.component';
 import { ManterUsuariosTdfComponent } from './template-driven-form/manter-usuarios-tdf/manter-usuarios-tdf.component';
+import { canDeactivateGuard } from '../can-deactivate.guard';
 
 const routes: Routes = [
   {
@@ -14,10 +15,12 @@ const routes: Routes = [
     children: [
       {
         path: 'rf/manter-usuarios/:formMode',
+        canDeactivate: [canDeactivateGuard],
         component: ManterUsuariosRfComponent
       },
       {
         path: 'tdf/manter-usuarios/:formMode',
+        canDeactivate: [canDeactivateGuard],
         component: ManterUsuariosTdfComponent
       },
       {

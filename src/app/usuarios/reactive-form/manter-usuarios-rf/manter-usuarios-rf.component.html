@@ -3,6 +3,7 @@
     <h2 *ngIf="formMode === 'editar'">Editar Usuário</h2>
 
     {{ usuarioForm.value | json }}
+    
     <form [formGroup]="usuarioForm" (ngSubmit)="formMode === 'criar' ? criarSubmit(usuarioForm) : editarSubmit(usuarioForm)">
         <div class="form-group">
             <label>Nome:</label>

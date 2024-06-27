@@ -1,8 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Endereco, Usuario } from '../../usuario';
 import { UsuarioStorageService } from '../../usuario-storage.service';
 import { Router } from '@angular/router';
+import { DialogService } from 'src/app/dialog.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-manter-usuarios-tdf',
@@ -11,16 +13,17 @@ import { Router } from '@angular/router';
 })
 export class ManterUsuariosTdfComponent {
 
+  @ViewChild('usuarioForm', { static: true })usuarioForm!: NgForm;
   @Input() formMode!: string;
   @Input() editId!: string;
   usuario: Usuario = new Usuario();
   endereco: Endereco = new Endereco();
-
   idade!: number;
 
   constructor(
     private usuarioStorageService: UsuarioStorageService,
-    private router: Router
+    private router: Router,
+    private dialogService: DialogService
    ) {}
 
   ngOnInit() {
@@ -130,5 +133,14 @@ export class ManterUsuariosTdfComponent {
   cancelar(): void {
 
     this.router.navigate(['/usuarios/tdf']);
+  }
+
+  canDeactivate(): Observable<boolean> | boolean {
+
+    if( this.usuarioForm.untouched ) {
+      return true;
+    }
+
+    return this.dialogService.confirm('Você irá sair sem salvar alterações. ');
   }
 }
