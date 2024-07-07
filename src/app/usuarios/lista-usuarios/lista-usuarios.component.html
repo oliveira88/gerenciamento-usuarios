@@ -1,0 +1,13 @@
+<button [routerLink]="['./manter-usuarios', 'criar']">Criar usuário</button>
+<ul *ngFor="let usuario of usuarios$ | async">
+    <li>
+        {{usuario.nomeSocial !== undefined ? usuario.nomeSocial : usuario.nome}},
+        {{usuario.cpf}},
+        {{usuario.email}},
+        {{usuario.isAdmin}}
+        <button [routerLink]="['./manter-usuarios', 'editar', { editId: usuario.id }]">Editar</button>
+        <button (click)="excluir(usuario)">Excluir</button>
+    </li>
+</ul>
+<br>
+<button (click)="logout()">Log out</button>

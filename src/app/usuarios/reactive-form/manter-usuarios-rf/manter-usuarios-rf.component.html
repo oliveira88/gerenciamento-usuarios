@@ -1,0 +1,110 @@
+<div>
+    <h2 *ngIf="formMode === 'criar'">Criar Usuário</h2>
+    <h2 *ngIf="formMode === 'editar'">Editar Usuário</h2>
+
+    {{ usuarioForm.value | json }}
+    
+    <form [formGroup]="usuarioForm" (ngSubmit)="formMode === 'criar' ? criarSubmit(usuarioForm) : editarSubmit(usuarioForm)">
+        <div class="form-group">
+            <label>Nome:</label>
+            <br>
+            <input type="text" name="nome"
+            required
+            formControlName="nome">
+        </div>
+
+        <div class="form-group">
+            <label>Data de Nascimento:</label>
+            <br>
+            <input type="date" name="dataDeNascimento" id="dataDeNascimento"
+            required
+            (ngModelChange)="updateIdade($event)"
+			formControlName="dataDeNascimento"
+            [ngModel]="usuario.dataDeNascimento">
+        </div>
+
+        <div class="form-group">
+            <label>CPF:</label>
+            <br>
+            <input type="text" name="cpf"
+            mask="000.000.000-00"
+            required
+            cpfValidator
+			formControlName="cpf">
+        </div>
+
+        <div class="form-group" *ngIf="menorDe18()">
+            <label>CPF do Responsável (obrigatório para menores de 18 anos):</label>
+            <br>
+            <input type="text" name="cpfResponsavel"
+            mask="000.000.000-00"
+            required
+            cpfValidator
+			formControlName="cpfResponsavel">
+        </div>
+
+        <div class="form-group">
+            <label>Email:</label>
+            <br>
+            <input type="email" name="email"
+            required
+			formControlName="email">
+        </div>
+
+        <div class="form-group">
+            <label>É admin:</label>
+            <br>
+            <input type="radio" name="isAdmin"
+            required
+			formControlName="isAdmin"
+            [value]="true"> <label>Sim</label>
+
+            <input type="radio" name="isAdmin"
+            required
+			formControlName="isAdmin"
+            [value]="false"> <label>Não</label>
+        </div>
+
+        <div class="form-group">
+            <label>Nome Social:</label>
+            <br>
+            <input type="text" name="nomeSocial"
+			formControlName="nomeSocial">
+        </div>
+
+        <div formGroupName="endereco">
+            <h4>Endereço:</h4>
+            <div class="form-group">
+                <label>Cidade:</label>
+                <br>
+                <input type="text" name="cidade"
+                formControlName="cidade">
+            </div>
+
+            <div class="form-group">
+                <label>Estado:</label>
+                <br>
+                <input type="text" name="estado"
+                formControlName="estado">
+            </div>
+
+            <div class="form-group">
+                <label>CEP:</label>
+                <br>
+                <input type="text" name="cep"
+                formControlName="cep"
+                mask="00000-000">
+            </div>
+
+            <div class="form-group">
+                <label>Logradouro:</label>
+                <br>
+                <input type="text" name="logradouro"
+                formControlName="logradouro">
+            </div>
+        </div>
+
+        <button type="submit" [disabled]="!usuarioForm.valid || menorDe12()">Salvar</button>
+        <button (click)="cancelar()">Cancelar</button>
+    </form>
+</div>
